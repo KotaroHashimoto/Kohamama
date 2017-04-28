@@ -18,6 +18,7 @@ input int Magic_Number = 1;
 double tp;
 double sl;
 double lot;
+string thisSymbol;
 
 const string indName = "BO_main001_porinashi";
 
@@ -36,6 +37,8 @@ int OnInit()
   else if(MarketInfo(Symbol(), MODE_MAXLOT) < Entry_Lot) {
     lot = MarketInfo(Symbol(), MODE_MAXLOT);
   }
+  
+  thisSymbol = Symbol();
   
 //---
    return(INIT_SUCCEEDED);
@@ -72,7 +75,7 @@ void OnTick()
 
   for(int i = 0; i < OrdersTotal(); i++) {
     if(OrderSelect(i, SELECT_BY_POS)) {
-      if(OrderMagicNumber() == Magic_Number) {
+      if(OrderMagicNumber() == Magic_Number && !StringCompare(OrderSymbol(), thisSymbol)) {
         cap --;
         
         if(cap <= 0) {
