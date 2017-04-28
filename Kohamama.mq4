@@ -30,6 +30,7 @@ int OnInit()
   
   tp = TP_pips * Point * 10.0;
   sl = SL_pips * Point * 10.0;
+  lot = Entry_Lot;
   
   if(Entry_Lot < MarketInfo(Symbol(), MODE_MINLOT)) {
     lot = 0.0;
